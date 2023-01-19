@@ -62,3 +62,11 @@ def parse(brand):
 
 	except Exception as e:
 		print (e)	
+
+def makeCsvFile(scraped_data):
+	with open('%s-ebay-data.csv'%(brand),'wb') as csvfile:
+		fieldnames = ["title","price",]
+		writer = csv.DictWriter(csvfile, fieldnames = fieldnames, quoting=csv.QUOTE_ALL)
+		writer.writeheader()
+		for data in scraped_data:
+			writer.writerow(data)
