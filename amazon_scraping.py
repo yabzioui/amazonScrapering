@@ -69,3 +69,8 @@ def makeCsvFile(scraped_data, item):
 		writer.writeheader()
 		for data in scraped_data:
 			writer.writerow(data)
+
+def beginAmazonScrape(item):
+	itemUrl = "https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords="+item
+	scraped_data = getAmazonPageData(itemUrl)
+	makeCsvFile(scraped_data, item)
