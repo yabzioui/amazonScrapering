@@ -6,6 +6,8 @@ from traceback import format_exc
 import argparse
 import sqlite3
 
+import amazon_scraping as aps
+
 
 def parse(brand):
 	#Test for
@@ -89,3 +91,18 @@ def addToDB(title, price):
 
 	c.close()
 	conn.close()
+if __name__ == "__main__":
+	print("Currently in Main.")
+
+	userInp = input("a) Amazon or b) Ebay?")
+	brand = ''
+	if userInp =="a":
+		brand = input("Enter Brand Name: ")
+		aps.beginAmazonScrape(brand)
+	elif userInp == "b":
+		brand =  input("Enter Brand name: ")
+		scraped_data = parse(brand)
+		makeCsvFile(scraped_data)
+		#addToDB(scraped_data)
+	else:
+		exit()
