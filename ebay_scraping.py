@@ -70,3 +70,22 @@ def makeCsvFile(scraped_data):
 		writer.writeheader()
 		for data in scraped_data:
 			writer.writerow(data)
+def addToDB(title, price):
+	conn = sqlite3.connect('sellers.db')
+	c = conn.cursor()
+
+	def create_table():
+		c.execute("CREATE TABLE IF NOT EXISTS amazon(item TEXT, value TEXT)")
+
+	# def data_entry():
+	# 	c.execute("INSERT INTO amazon VALUES('watches', '$19.54')")
+	# 	conn.commit()
+	# 	c.close()
+	# 	conn.close()
+
+	create_table()
+	c.execute("INSERT INTO amazon VALUES(title, price) VALUES (?, ?)")
+	conn.commit()
+
+	c.close()
+	conn.close()
