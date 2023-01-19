@@ -60,3 +60,12 @@ def getAmazonPageData(url):
 	print("Title Length: " + str(len(raw_title)))
 	print("Price lenth: " + str(len(raw_price)))
 	return scraped_products
+
+
+def makeCsvFile(scraped_data, item):
+	with open('%samazon-data.csv'%(item),'wb') as csvfile:
+		fieldnames = ["title","price",]
+		writer = csv.DictWriter(csvfile, fieldnames = fieldnames, quoting=csv.QUOTE_ALL)
+		writer.writeheader()
+		for data in scraped_data:
+			writer.writerow(data)
